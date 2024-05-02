@@ -1,0 +1,122 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables
+      author: Oleksander
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    checkConstraint: "\"username\" ~ '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$'"
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    checkConstraint: "\"email\" ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'"
+              - column:
+                  name: join_date
+                  type: date
+                  constraints:
+                    nullable: false
+                    checkConstraint: "\"join_date\" <= 'now()'"
+              - column:
+                  name: role
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    checkConstraint: "length(\"role\") > 0"
+
+        - createTable:
+            tableName: photos
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: photo_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+                    checkConstraint: "\"photo_name\" ~ '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$'"
+              - column:
+                  name: photo_format
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    checkConstraint: "length(\"photo_format\") > 0"
+              - column:
+                  name: photo_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_description
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+                    checkConstraint: "length(\"photo_description\") <= 500"
+              - column:
+                  name: photo_tags
+                  type: varchar(500)
+                  constraints:
+                    nullable: true
+                    checkConstraint: "length(\"photo_tags\") <= 500"
+              - column:
+                  name: upload_date
+                  type: date
+                  constraints:
+                    nullable: false
+                    checkConstraint: "\"upload_date\" <= 'now()'"
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    referencedTableName: users
+                    referencedColumnNames: id
+                    foreignKeyName: fk_photos_to_users
+  - changeSet:
+      id: add-indexes
+      author: Oleksander
+      changes:
+        - createIndex:
+            indexName: idx_filter_photos
+            tableName: photos
+            columns:
+              - column:
+                  name: photo_name
+              - column:
+                  name: photo_format
+              - column:
+                  name: upload_date
+  - changeSet:
+      id: add-fill-for-user
+      author: Oleksander
+      changes:
+        - sql:
+            sql: insert into users(username, password, email, join_date, role) values
+              ('testuser', 'password', 'user@mail.com', '2020-01-01', 'ROLE_USER')
+        - sql:
+            sql: insert into users(username, password, email, join_date, role) values
+              ('testadmin', 'password', 'admin@mail.com', '2020-01-01', 'ROLE_ADMIN')
+        - sql:
+            sql: insert into users(username, password, email, join_date, role) values
+              ('testuser2', 'password', 'user2@mail.com', '2020-01-01', 'ROLE_USER')

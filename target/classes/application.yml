@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: profitsoft2
+  datasource:
+    url: jdbc:postgresql://localhost:5432/entire_photos
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 35MB
+      max-request-size: 35MB
+      file-size-threshold: -1
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  error:
+    include-exception: true #include-message: always

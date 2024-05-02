@@ -1,0 +1,95 @@
+[
+  {
+    "id": 1,
+    "photoName": "photo1",
+    "photoFormat": "jpg",
+    "photoPath": "1/photo1.jpg",
+    "photoDescription": "photo1 description",
+    "photoTags": "tag1, tag2, tag3",
+    "uploadDate": "2022-01-01",
+    "user": {
+      "id": 1
+    }
+  },
+  {
+    "id": 2,
+    "photoName": "photo2",
+    "photoFormat": "jpg",
+    "photoPath": "2/photo2.jpg",
+    "uploadDate": "2022-01-02",
+    "user": {
+      "id": 2
+    },
+    "photoDescription": "photo2 description",
+    "photoTags": "tag1, tag2, tag3"
+  },
+  {
+    "id": 3,
+    "photoName": "photo3",
+    "photoFormat": "jpg",
+    "photoPath": "3/photo3.jpg",
+    "uploadDate": "2022-01-03",
+    "user": {
+      "id": 1
+    },
+    "photoDescription": "photo3 description",
+    "photoTags": "tag1, tag2, tag3"
+  },
+  {
+    "photoNameDDD": "photo4",
+    "uploadDate": "2022-01-04",
+    "userlll": {
+      "id": 2
+    },
+    "photoDescription": "photo4 description",
+    "photoTags": "tag1, tag2, tag3"
+  },
+  {
+    "id": 5,
+    "photoName": "photo5",
+    "photoFormat": "jpg",
+    "photoPath": "5/photo5.jpg",
+    "uploadDate": "2022-01-05",
+    "user": {
+      "id": 2
+    },
+    "photoDescription": "photo5 description",
+    "photoTags": "tag1, tag2, tag3"
+  },
+  {
+    "id": 6,
+    "photoName": "photo6",
+    "photoFormat": "jpg",
+    "photoPath": "6/photo6.jpg",
+    "uploadDate": "2022-01-06",
+    "user": {
+      "id": 1
+    },
+    "photoDescription": "photo6 description",
+    "photoTags": "tag1, tag2, tag3"
+  },
+  {
+    "id": 7,
+    "photoName": "photo7",
+    "photoFormat": "jpg",
+    "photoPath": "7/photo7.jpg",
+    "uploadDate": "2022-01-07",
+    "user": {
+      "id": 2
+    },
+    "photoDescription": "",
+    "photoTags": ""
+  },
+  {
+    "id": 8,
+    "photoName": "photo8",
+    "photoFormat": "jpg",
+    "photoPath": "8/photo8.jpg",
+    "uploadDate": "2022-01-08",
+    "user": {
+      "id": 1
+    },
+    "photoDescription": "",
+    "photoTags": ""
+  }
+]
