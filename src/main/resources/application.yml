@@ -1,6 +1,6 @@
 spring:
   application:
-    name: profitsoft2
+    name: entire-photo-backend-main
   datasource:
     url: jdbc:postgresql://localhost:5432/entire_photos
     driver-class-name: org.postgresql.Driver
@@ -18,7 +18,34 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  rabbitmq:
+    username: admin
+    password: secret
+    template:
+      default-receive-queue: user-registration-queue
+      exchange: user-registration-exchange
+  config:
+    import: optional:consul:/
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        health-check-path: /health
 
 server:
   error:
     include-exception: true #include-message: always
+    include-message: always
+    include-binding-errors: always
+  port: 1001
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: "*"

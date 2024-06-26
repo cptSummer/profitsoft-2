@@ -142,4 +142,12 @@ databaseChangeLog:
         - sql:
             sql: insert into users(username, password, email, join_date, role) values
               ('testuser2', 'password', 'user2@mail.com', '2020-01-01', 'ROLE_USER')
+  - changeSet:
+      id: remove-date-checks
+      author: Oleksander
+      changes:
+        - sql:
+            sql: alter table photos drop constraint check_upload_date
+        - sql:
+            sql: alter table users drop constraint check_join_date
 

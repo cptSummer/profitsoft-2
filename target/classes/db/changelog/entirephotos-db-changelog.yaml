@@ -108,6 +108,28 @@ databaseChangeLog:
               - column:
                   name: upload_date
   - changeSet:
+      id: add-checks
+      author: Oleksander
+      changes:
+        - sql:
+            sql: alter table users add constraint check_username check (username ~* '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$')
+        - sql:
+            sql: alter table users add constraint check_email check ( email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' )
+        - sql:
+            sql: alter table users add constraint check_join_date  check (join_date <= 'now()')
+        - sql:
+            sql: alter table users add constraint check_role  check (length(role) > 0)
+        - sql:
+            sql: alter table photos add constraint check_photo_name check (photo_name ~* '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$')
+        - sql:
+            sql: alter table photos add constraint check_photo_format check (length(photo_format) > 0)
+        - sql:
+            sql: alter table photos add constraint check_upload_date  check (upload_date <= 'now()')
+        - sql:
+            sql: alter table photos add constraint check_description  check (length(photo_description) <= 500)
+        - sql:
+            sql: alter table photos add constraint check_tags  check (length(photo_tags) <= 500)
+  - changeSet:
       id: add-fill-for-user
       author: Oleksander
       changes:
@@ -120,28 +142,4 @@ databaseChangeLog:
         - sql:
             sql: insert into users(username, password, email, join_date, role) values
               ('testuser2', 'password', 'user2@mail.com', '2020-01-01', 'ROLE_USER')
-  - changeSet:
-      id: add-checks
-      author: Oleksander
-      changes:
-        - sql:
-            sql: alter table users add constraint check_username check (username ~* '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$')
-        - sql:
-            sql: alter table users add constraint check_email check ( email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' )
-
-        - sql:
-            sql: alter table users add constraint check_join_date  check (join_date <= 'now()')
-        - sql:
-            sql: alter table users add constraint check_role  check (length(role) > 0)
-
-        - sql:
-            sql: alter table photos add constraint check_photo_name check (photo_name ~* '^[A-Za-z0-9А-ЩЬЮЯЄІЇа-щьюяєіїҐґ ]{4,}$')
-        - sql:
-            sql: alter table photos add constraint check_photo_format check (length(photo_format) > 0)
-        - sql:
-            sql: alter table photos add constraint check_upload_date  check (upload_date <= 'now()')
-        - sql:
-            sql: alter table photos add constraint check_description  check (length(photo_description) <= 500)
-        - sql:
-            sql: alter table photos add constraint check_tags  check (length(photo_tags) <= 500)
 
